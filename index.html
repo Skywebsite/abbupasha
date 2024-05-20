@@ -1,60 +1,49 @@
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTML to Sheets</title>
-       <script src="https://cdn.tailwindcss.com" defer></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HTML form submit to Google Sheet</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
-        <div class="flex items-center h-screen w-full bg-orange-100">
-      <div class="w-full bg-white rounded shadow-lg p-8 m-4 md:max-w-sm md:mx-auto">
-        <h1 class="block w-full text-center text-grey-darkest mb-6">Feedback</h1>
-
-        <form class="mb-4 flex flex-wrap justify-between" id="form">
-  
-       
-          <div class="flex flex-col w-full mb-4">
-            <label class="field-label" for="email">Name</label>
-            <input class="bg-green-100 px-2 py-1 outline-none" type="text" name="Name" id="email">
-          </div>
-          <div class="flex flex-col w-full mb-4">
-            <label class="field-label" for="password">Message</label>
-            <textarea class="bg-green-100 px-2 py-1 outline-none" type="text" name="Message" id="Message"></textarea>
+  <div class="container text-center">
+    <br>
+    <h1>HTML form submit to Google Sheet</h1>
+    <br>
+    <div class="card mx-auto" style="width: 18rem;">
+      <div class="card-body">
+        <form name="submit-to-google-sheet">
+          <div class="mb-3">
+            <input name="fullname" type="text" class="form-control" placeholder="Fullname" required>
           </div>
 
+          <div class="mb-3">
+            <input name="email" type="email" class="form-control" placeholder="Email" required>
+          </div>
 
-          <input type="date" name="Time" id="">
-          <input type="checkbox" name="Check" value="true" id="">
-          <button class="bg-orange-300 px-3 py-1 text-white mx-auto" type="submit" id="submit">Submit</button>
+          <button type="submit" class="btn btn-primary">Send</button>
         </form>
+      </div>
     </div>
+
   </div>
 
-</body>
-
-<script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbwihAYBErbM9w-l7KXnGpzs76bBGhCFBGw2dh0uNvcCmh_AZy9grrx1VsqCyTKmihbzEQ/exec'
-    const form = document.querySelector('#form')
-    const btn = document.querySelector('#submit')
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const scriptURL = '^^'
+    const form = document.forms['submit-to-google-sheet']
 
     form.addEventListener('submit', e => {
       e.preventDefault()
-      btn.disabled = true
-      btn.innerHTML = "Loading..."
-
-      console.log(form)
       fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-        .then(response => { 
-              btn.disabled = false
-      btn.innerHTML = "Submit"
-            alert('Success!', response) })
-        .catch(error => {
-                     btn.disabled = false
-      btn.innerHTML = "Submit"
-            alert('Error!', error.message)})
+        .then(response => console.log('Success!', response))
+        .catch(error => console.error('Error!', error.message))
     })
-</script>
+  </script>
+</body>
+
 </html>
